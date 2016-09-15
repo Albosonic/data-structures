@@ -4,6 +4,7 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
+    // O(1)
     var node = Node(value);
     if (list.head === null) {
       list.head = node;
@@ -15,12 +16,14 @@ var LinkedList = function() {
   };
 
   list.removeHead = function() {
+    // O(1)
     var prevHead = this.head;
     this.head = this.head.next;
     return prevHead.value;
   };
 
   list.contains = function(target) {
+    // O(n)
     var found = false;
     var pointer = this.head;
 

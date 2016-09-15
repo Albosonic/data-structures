@@ -8,10 +8,12 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
+  // O(1)
   this.children.push(Tree(value));
 };
 
 treeMethods.contains = function(target) {
+  // O(n)
   var found = false;
 
   var subroutine = function (node) {
