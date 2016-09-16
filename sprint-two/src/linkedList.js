@@ -37,6 +37,19 @@ var LinkedList = function() {
     return found;
   };
 
+  list.removeTail = function () {
+    var pointer = this.head;
+
+    while (pointer.next !== null) {
+      if (pointer.next === this.tail) {
+        pointer.next = null;
+        this.tail = pointer;
+      } else {
+        pointer = pointer.next;
+      }
+    }
+  };
+
   return list;
 };
 
