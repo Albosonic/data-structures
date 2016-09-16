@@ -37,10 +37,10 @@ describe('binarySearchTree', function() {
     expect(array).to.eql([5, 2, 3]);
   });
 
-  it('should hold a balanced tree after rebalance is called', function(){
+  it('should hold a balanced tree after rebalance is called', function() {
     binarySearchTree.insert(4);
     binarySearchTree.insert(3);
-    binarySearchTree.rebalance();
+    binarySearchTree = binarySearchTree.rebalance(binarySearchTree);
     expect(binarySearchTree.value).to.equal(4);
     expect(binarySearchTree.left.value).to.equal(3);
     expect(binarySearchTree.right.value).to.equal(5);

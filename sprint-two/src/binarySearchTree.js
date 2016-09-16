@@ -68,6 +68,59 @@ BinarySearchTree.prototype.depthFirstLog = function(callback) {
   subroutine(this);
 };
 
+BinarySearchTree.prototype.rebalance = function(node) {
+  
+  //var temp = node.left.right;
+  //node.left.right = node;
+  //node.left = temp;
+
+  var temp = node;
+  node = node.left;
+  temp.left = null;
+  temp.right = null;
+  node.right = temp;
+  return node;
+};
+
+
+var test = new BinarySearchTree(5);
+test.insert(4);
+test.insert(3);
+console.log(test);
+//debugger;
+test = test.rebalance(test);
+console.log(test);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
