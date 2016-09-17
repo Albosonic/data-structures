@@ -34,6 +34,15 @@ treeMethods.contains = function(target) {
   return found;
 };
 
+treeMethods.removeChild = function(target) {
+  console.log(this);
+  for (var i = 0; i < this.children.length; i++) {
+    if (this.children[i].value === target) {
+      this.children.splice(i, 1); 
+    }
+  }
+};
+
 
 
 /*
