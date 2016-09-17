@@ -12,37 +12,49 @@ describe('binarySearchTree', function() {
   });
 
   it('should insert values at the correct location in the tree', function() {
-    binarySearchTree.insert(2);
-    binarySearchTree.insert(3);
-    binarySearchTree.insert(7);
-    binarySearchTree.insert(6);
-    expect(binarySearchTree.left.right.value).to.equal(3);
-    expect(binarySearchTree.right.left.value).to.equal(6);
+    binarySearchTree.insert(binarySearchTree._root, 2);
+    binarySearchTree.insert(binarySearchTree._root, 3);
+    binarySearchTree.insert(binarySearchTree._root, 7);
+    binarySearchTree.insert(binarySearchTree._root, 6);
+    expect(binarySearchTree._root._left._right._value).to.equal(3);
+    expect(binarySearchTree._root._right._left._value).to.equal(6);
   });
 
   it('should have a working "contains" method', function() {
-    binarySearchTree.insert(2);
-    binarySearchTree.insert(3);
-    binarySearchTree.insert(7);
-    expect(binarySearchTree.contains(7)).to.equal(true);
-    expect(binarySearchTree.contains(8)).to.equal(false);
+    binarySearchTree.insert(binarySearchTree._root, 2);
+    binarySearchTree.insert(binarySearchTree._root, 3);
+    binarySearchTree.insert(binarySearchTree._root, 7);
+    expect(binarySearchTree.contains(binarySearchTree._root, 7)).to.equal(true);
+    expect(binarySearchTree.contains(binarySearchTree._root, 8)).to.equal(false);
   });
 
   it('should execute a callback on every value in a tree using "depthFirstLog"', function() {
     var array = [];
     var func = function(value) { array.push(value); };
-    binarySearchTree.insert(2);
-    binarySearchTree.insert(3);
+    binarySearchTree.insert(binarySearchTree._root, 2);
+    binarySearchTree.insert(binarySearchTree._root, 3);
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
   });
 
-  it('should hold a balanced tree after rebalance is called', function() {
-    binarySearchTree.insert(4);
-    binarySearchTree.insert(3);
-    binarySearchTree = binarySearchTree.rebalance(binarySearchTree);
-    expect(binarySearchTree.value).to.equal(4);
-    expect(binarySearchTree.left.value).to.equal(3);
-    expect(binarySearchTree.right.value).to.equal(5);
+  it('should detect an unbalanced tree', function() {
+    binarySearchTree.insert(binarySearchTree._root, 3);
+    binarySearchTree.insert(binarySearchTree._root, 2);
+    expect(binarySearchTree._isUnbalanced()).to.equal(true);
+  });
+
+  it('should properly identify balanced trees', function() {
+    binarySearchTree.insert(binarySearchTree._root, 3);
+    binarySearchTree.insert(binarySearchTree._root, 8);
+    expect(binarySearchTree._isUnbalanced()).to.equal(false);
+  });
+
+  it('should rebalance a tree automatically', function () {
+    binarySearchTree.insert(binarySearchTree._root, 4);
+    binarySearchTree.insert(binarySearchTree._root, 3);
+    // automatic rebalancing occurs
+    expect(binarySearchTree._root._value).to.equal(4);
+    expect(binarySearchTree._root._left._value).to.equal(3);
+    expect(binarySearchTree._root._right._value).to.equal(5);
   });
 });
