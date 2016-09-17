@@ -50,21 +50,19 @@ BinarySearchTree.prototype.contains = function(node, target) {
   return false;
 };
 
-BinarySearchTree.prototype.depthFirstLog = function(callback) {
+BinarySearchTree.prototype.depthFirstLog = function(node, callback) {
   // O(n)
-  var subroutine = function (node) {
-    callback(node._value);
+  
+  callback(node._value);
 
-    if (node._left !== null) {
-      subroutine(node._left);
-    }
+  if (node._left !== null) {
+    this.depthFirstLog(node._left, callback);
+  }
 
-    if (node._right !== null) {
-      subroutine(node._right);
-    }
-  };
-
-  subroutine(this._root);
+  if (node._right !== null) {
+    this.depthFirstLog(node._right, callback);
+  }
+  
 };
 
 BinarySearchTree.prototype._rebalance = function(node, parent) {
