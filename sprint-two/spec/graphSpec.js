@@ -68,4 +68,18 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+
+  it('should find the shortest path', function () {
+    for (var i = 1; i < 5; i++) {
+      graph.addNode(i);
+    }
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 3);
+    graph.addEdge(3, 4);
+    graph.addEdge(2, 4);
+    var path = graph.shortestPath(1, 4);
+    expect(path).to.eql([1, 2, 4]);
+  });
+
+
 });

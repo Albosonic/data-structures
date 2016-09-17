@@ -69,11 +69,7 @@ BinarySearchTree.prototype.depthFirstLog = function(callback) {
 };
 
 BinarySearchTree.prototype.rebalance = function(node) {
-  
-  //var temp = node.left.right;
-  //node.left.right = node;
-  //node.left = temp;
-
+  // O(1)
   var temp = node;
   node = node.left;
   temp.left = null;
@@ -81,45 +77,6 @@ BinarySearchTree.prototype.rebalance = function(node) {
   node.right = temp;
   return node;
 };
-
-
-var test = new BinarySearchTree(5);
-test.insert(4);
-test.insert(3);
-console.log(test);
-//debugger;
-test = test.rebalance(test);
-console.log(test);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*

@@ -67,8 +67,133 @@ Graph.prototype.forEachNode = function(cb) {
   }
 };
 
+Graph.prototype.shortestPath = function(start, end) {
+  var paths = [];
+  var that = this;
+  var findPath = function findPath(node, path) {
+    // console.log(this);
+    path.push(node);
+    if (node === end) {
+      paths.push(path);
+    } else {
+      // console.log('node', node, ': has edges', that.nodes[node]);
+      for (var i = 0; i < this.nodes[node].length; i++) {
+        var edge = this.nodes[node][i];
+        // console.log('node', node, ': path', path);
+        // console.log('node', node, ': testing for existence of edge', edge, 'in path');
+        if (path.indexOf(edge) === -1) {
+          // console.log('node', node, ':', 'edge', edge, 'not found in path');
+          // console.log('findPath(', edge, ', ', path, ')');
+          boundFindPath(edge, path.slice());
+        }
+      }
+    }
+  };
+  // console.log('findPath(', start, ', ', [], ')');
+  // Find all possible paths and store them in the `paths`
+  // console.log(this);
+  var boundFindPath = findPath.bind(this);
+  boundFindPath(start, []);
+  // findPath(start, []);
+  // console.log(paths);
+
+  if (paths.length === 0) {
+    return [];
+  }
+
+  // Find the shortest path in paths
+  var shortPath = paths[0];
+  for (var i = 0; i < paths.length; i++) {
+    if (paths[i].length < shortPath.length) {
+      shortPath = paths[i];
+    }
+  }
+
+  return shortPath;
+};
+  
+
+
+  /*
+  var seen = {};
+  var that = this;
+  var iCheck = 1000;
+  var curNode;
+  var sub = function(node) {
+    if (node in seen) {
+      // we've seen it do nothing
+
+    } else {
+      seen[node] = true;
+      var currentNodeEdges = that.nodes[node];
+      // console.log(currentNodeEdges); 
+      for (var i = 0; i < currentNodeEdges.length; i++) {
+        var oldI = i - 1;
+        var prevEdge = currentNodeEdges[oldI];
+        var edge = currentNodeEdges[i];
+        console.log('edge', edge, 'currentNodeEdges', currentNodeEdges);
+
+        if (edge === end) {
+          console.log('prevEdge: ', prevEdge, 'currentNodeEdges: ', currentNodeEdges);
+          curNode = edge;
+          if (prevEdge < iCheck) {
+            iCheck = prevEdge;
+          }
+          
+        }
+        sub(edge);
+      }
+      console.log('that.nodes', that.nodes);
+      // console.log(that.nodes[iCheck]);
+    }
+
+  };
+  sub(start);
+  // console.log(seen);
+  */
+
+
+
+
+  // var nodeSeen = {};
+  // var that = this;
+  // var sub = function(node) {
+  //   console.log('node*********', that.nodes);
+  //   for (var i = 0; i < that.nodes[node]; i++) {
+  //     if (that.nodes[node][i] in nodeSeen) {
+
+  //     } else { 
+  //       nodeSeen[that.nodes[node][i]] = true;
+  //       sub(that.nodes[node][i]);
+  //       console.log(that.nodes[node][i]);
+  //     }
+  //   }
+  // };
+  // console.log(this);
+  // sub(start);
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
